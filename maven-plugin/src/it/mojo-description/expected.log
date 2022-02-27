@@ -1,0 +1,277 @@
+Name: SortPom Plugin
+Description: A Maven plugin that sorts the pom.xml file.
+Group Id: com.github.ekryd.sortpom
+Artifact Id: sortpom-maven-plugin
+Version: @pom.version@
+Goal Prefix: sortpom
+
+This plugin has 3 goals:
+
+sortpom:help
+  Description: Display help information on sortpom-maven-plugin.
+    Call mvn sortpom:help -Ddetail=true -Dgoal=<goal-name> to display parameter
+    details.
+  Implementation: sortpom.HelpMojo
+  Language: java
+
+  Available parameters:
+
+    detail (Default: false)
+      User property: detail
+      If true, display all settable properties for each goal.
+
+    goal
+      User property: goal
+      The name of the goal for which to show help. If unspecified, all goals
+      will be displayed.
+
+    indentSize (Default: 2)
+      User property: indentSize
+      The number of spaces per indentation level, should be positive.
+
+    lineLength (Default: 80)
+      User property: lineLength
+      The maximum length of a display line, should be positive.
+
+sortpom:sort
+  Description: Sorts the pom.xml for a Maven project.
+  Implementation: sortpom.SortMojo
+  Language: java
+  Bound to phase: validate
+
+  Available parameters:
+
+    backupFileExtension (Default: .bak)
+      User property: sort.backupFileExtension
+      Name of the file extension for the backup file.
+
+    createBackupFile (Default: true)
+      User property: sort.createBackupFile
+      Should a backup copy be created for the sorted pom.
+
+    encoding (Default: UTF-8)
+      User property: sort.encoding
+      Encoding for the files.
+
+    expandEmptyElements (Default: true)
+      User property: sort.expandEmptyElements
+      Should empty xml elements be expanded or not. Example:
+      <configuration></configuration> or <configuration/>
+
+    ignoreLineSeparators (Default: true)
+      User property: sort.ignoreLineSeparators
+      Ignore line separators when comparing current POM with sorted one
+
+    indentBlankLines (Default: false)
+      User property: sort.indentBlankLines
+      Should blank lines (if preserved) have indentation.
+
+    indentSchemaLocation (Default: false)
+      User property: sort.indentSchemaLocation
+      Should the schema location attribute of project (top level xml element)
+      be placed on a new line. The attribute will be indented (2 *
+      nrOfIndentSpace + 1 space) characters.
+
+    keepBlankLines (Default: true)
+      User property: sort.keepBlankLines
+      Should blank lines in the pom-file be preserved. A maximum of one line is
+      preserved between each tag.
+
+    keepTimestamp (Default: false)
+      User property: sort.keepTimestamp
+      Whether to keep the file timestamps of old POM file when creating new POM
+      file.
+
+    lineSeparator (Default: ${line.separator})
+      User property: sort.lineSeparator
+      Line separator for sorted pom. Can be either \n, \r or \r\n
+
+    nrOfIndentSpace (Default: 2)
+      User property: sort.nrOfIndentSpace
+      Number of space characters to use as indentation. A value of -1 indicates
+      that tab character should be used instead.
+
+    pomFile (Default: ${project.file})
+      User property: sort.pomFile
+      This is the File instance that refers to the location of the pom that
+      should be sorted.
+
+    predefinedSortOrder (Default: recommended_2008_06)
+      User property: sort.predefinedSortOrder
+      Choose between a number of predefined sort order files.
+
+    skip (Default: false)
+      User property: sort.skip
+      Set this to 'true' to bypass sortpom plugin
+
+    sortDependencies
+      User property: sort.sortDependencies
+      Comma-separated ordered list how dependencies should be sorted. Example:
+      scope,groupId,artifactId. If scope is specified in the list then the
+      scope ranking is COMPILE, PROVIDED, SYSTEM, RUNTIME, IMPORT and TEST. The
+      list can be separated by ',;:'
+
+    sortDependencyExclusions
+      User property: sort.sortDependencyExclusions
+      Comma-separated ordered list how exclusions, for dependencies, should be
+      sorted. Example: groupId,artifactId The list can be separated by ',;:'
+
+    sortExecutions (Default: false)
+      User property: sort.sortExecutions
+      Should the Maven pom execution sections be sorted by phase and then
+      alphabetically.
+
+    sortModules (Default: false)
+      User property: sort.sortModules
+      Should the Maven pom sub modules be sorted alphabetically.
+
+    sortOrderFile
+      User property: sort.sortOrderFile
+      Custom sort order file.
+
+    sortPlugins
+      User property: sort.sortPlugins
+      Comma-separated ordered list how plugins should be sorted. Example:
+      groupId,artifactId The list can be separated by ',;:'
+
+    sortProperties (Default: false)
+      User property: sort.sortProperties
+      Should the Maven pom properties be sorted alphabetically. Affects both
+      project/properties and project/profiles/profile/properties
+
+    spaceBeforeCloseEmptyElement (Default: false)
+      User property: sort.spaceBeforeCloseEmptyElement
+      Should non-expanded empty xml element have space before closing tag.
+      Example: <configuration /> or <configuration/>
+
+sortpom:verify
+  Description: Verifies that the pom.xml is sorted. If the verification fails
+    then the pom.xml is sorted.
+  Implementation: sortpom.VerifyMojo
+  Language: java
+  Bound to phase: validate
+
+  Available parameters:
+
+    backupFileExtension (Default: .bak)
+      User property: sort.backupFileExtension
+      Name of the file extension for the backup file.
+
+    createBackupFile (Default: true)
+      User property: sort.createBackupFile
+      Should a backup copy be created for the sorted pom.
+
+    encoding (Default: UTF-8)
+      User property: sort.encoding
+      Encoding for the files.
+
+    expandEmptyElements (Default: true)
+      User property: sort.expandEmptyElements
+      Should empty xml elements be expanded or not. Example:
+      <configuration></configuration> or <configuration/>
+
+    ignoreLineSeparators (Default: true)
+      User property: sort.ignoreLineSeparators
+      Ignore line separators when comparing current POM with sorted one
+
+    indentBlankLines (Default: false)
+      User property: sort.indentBlankLines
+      Should blank lines (if preserved) have indentation.
+
+    indentSchemaLocation (Default: false)
+      User property: sort.indentSchemaLocation
+      Should the schema location attribute of project (top level xml element)
+      be placed on a new line. The attribute will be indented (2 *
+      nrOfIndentSpace + 1 space) characters.
+
+    keepBlankLines (Default: true)
+      User property: sort.keepBlankLines
+      Should blank lines in the pom-file be preserved. A maximum of one line is
+      preserved between each tag.
+
+    keepTimestamp (Default: false)
+      User property: sort.keepTimestamp
+      Whether to keep the file timestamps of old POM file when creating new POM
+      file.
+
+    lineSeparator (Default: ${line.separator})
+      User property: sort.lineSeparator
+      Line separator for sorted pom. Can be either \n, \r or \r\n
+
+    nrOfIndentSpace (Default: 2)
+      User property: sort.nrOfIndentSpace
+      Number of space characters to use as indentation. A value of -1 indicates
+      that tab character should be used instead.
+
+    pomFile (Default: ${project.file})
+      User property: sort.pomFile
+      This is the File instance that refers to the location of the pom that
+      should be sorted.
+
+    predefinedSortOrder (Default: recommended_2008_06)
+      User property: sort.predefinedSortOrder
+      Choose between a number of predefined sort order files.
+
+    skip (Default: false)
+      User property: sort.skip
+      Set this to 'true' to bypass sortpom plugin
+
+    sortDependencies
+      User property: sort.sortDependencies
+      Comma-separated ordered list how dependencies should be sorted. Example:
+      scope,groupId,artifactId. If scope is specified in the list then the
+      scope ranking is COMPILE, PROVIDED, SYSTEM, RUNTIME, IMPORT and TEST. The
+      list can be separated by ',;:'
+
+    sortDependencyExclusions
+      User property: sort.sortDependencyExclusions
+      Comma-separated ordered list how exclusions, for dependencies, should be
+      sorted. Example: groupId,artifactId The list can be separated by ',;:'
+
+    sortExecutions (Default: false)
+      User property: sort.sortExecutions
+      Should the Maven pom execution sections be sorted by phase and then
+      alphabetically.
+
+    sortModules (Default: false)
+      User property: sort.sortModules
+      Should the Maven pom sub modules be sorted alphabetically.
+
+    sortOrderFile
+      User property: sort.sortOrderFile
+      Custom sort order file.
+
+    sortPlugins
+      User property: sort.sortPlugins
+      Comma-separated ordered list how plugins should be sorted. Example:
+      groupId,artifactId The list can be separated by ',;:'
+
+    sortProperties (Default: false)
+      User property: sort.sortProperties
+      Should the Maven pom properties be sorted alphabetically. Affects both
+      project/properties and project/profiles/profile/properties
+
+    spaceBeforeCloseEmptyElement (Default: false)
+      User property: sort.spaceBeforeCloseEmptyElement
+      Should non-expanded empty xml element have space before closing tag.
+      Example: <configuration /> or <configuration/>
+
+    verifyFail (Default: sort)
+      User property: sort.verifyFail
+      What should happen if verification fails. Can be either 'sort', 'warn' or
+      'stop'
+
+    verifyFailOn (Default: xmlElements)
+      User property: sort.verifyFailOn
+      What kind of differences should trigger verify failure. Can be either
+      'xmlElements' or 'strict'. Can be combined with ignoreLineSeparators
+
+    violationFilename
+      User property: sort.violationFilename
+      Saves the verification failure to an external xml file, recommended
+      filename is 'target/sortpom_reports/violation.xml'.
+
+
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
